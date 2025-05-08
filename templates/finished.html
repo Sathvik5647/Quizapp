@@ -106,11 +106,9 @@
         <div class="score">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
-            <ul>
                 {% for msg in messages %}
-                <li>{{ msg }}</li>
+                <div>{{ msg }}</div>
                 {% endfor %}
-            </ul>
             {% endif %}
             {% endwith %}
             <p>Your score: {{ score }}/5</p>

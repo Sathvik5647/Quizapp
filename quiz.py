@@ -141,11 +141,11 @@ def quiz(qno):
         selected_option = request.form.get('option')
         if selected_option and selected_option.upper() == question.correct_option.upper():
             if qno==5:
-                score = Score(score=qno - 1, user_id=session['user_id'])
+                score = Score(score=qno, user_id=session['user_id'])
                 db.session.add(score)
                 db.session.commit()
                 flash("Quiz Finished!")
-                return redirect(url_for("finished", score=qno - 1))
+                return redirect(url_for("finished", score=qno))
             else:
                 flash("Correct!")
                 return redirect(url_for("quiz", qno=qno + 1))
