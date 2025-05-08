@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #0d1b2a;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 96%;
+      background-color: #0b1723;
+      box-shadow: 0 2px 8px #00b4d8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+
+    .nav-title {
+      font-size: 1.5rem;
+      color: #00b4d8;
+      font-weight: 800;
+    }
+
+    .nav-btn {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      background-color: #00b4d8;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      background-color: #0099ba;
+    }
+
+    h2 {
+      color: #00b4d8;
+      margin: 1.5rem 0 1rem;
+    }
+
+    .quiz-btn {
+      padding: 0.8rem 1.5rem;
+      background-color: #1a2636;
+      border: 2px solid #00b4d8;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 8px #00b4d8;
+      transition: 0.3s ease;
+    }
+
+    .quiz-btn:hover {
+      background-color: #16324f;
+    }
+
+    .tables {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      width: 80%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: linear-gradient(145deg, #0e1c2b, #0b1723);
+      box-shadow: 0 0 10px #00b4d8;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #2c3e50;
+    }
+
+    th {
+      background-color: #00b4d8;
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: #16324f;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-title">🚀 QuizMaster</div>
+    <a href="{{ url_for('logout') }}"><button class="nav-btn">Logout</button></a>
+  </nav>
+
+  <h2>Welcome, {{ user }}</h2>
+
+  <a href="{{ url_for('quiz', qno=1) }}">
+    <button class="quiz-btn">Start Quiz</button>
+  </a>
+
+  <div class="tables">
+    <div class="personal-record">
+      <h3>📘 Your Personal Record</h3>
+      <table>
+        <thead>
+          <tr><th>Sr. No.</th><th>Score</th><th>Date</th></tr>
+        </thead>
+        <tbody>
+          {% for s in personal_record %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ s.score }}</td>
+              <td>{{ s.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="global-leaderboard">
+      <h3>🌐 Global Leaderboard</h3>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Username</th><th>Score</th></tr>
+        </thead>
+        <tbody>
+          {% for entry in leaderboard %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>
+                {% for user in names %}
+                  {% if user.id == entry.user_id %}
+                    {{ user.username }}
+                  {% endif %}
+                {% endfor %}
+              </td>
+              <td>{{ entry.score }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

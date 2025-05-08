@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuizMaster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0d1b2a;
+      color: white;
+    }
+
+    nav {
+      position: fixed;
+      width: 96%;
+      top: 0;
+      background-color: #0b1723;
+      box-shadow: 0 2px 8px #00b4d8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+
+    .nav-title {
+      font-size: 1.8rem;
+      color: #00b4d8;
+      font-weight: 800;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: #00b4d8;
+      border: 1px solid #00b4d8;
+    }
+
+    .signup-btn {
+      background-color: #00b4d8;
+      color: white;
+    }
+
+    header {
+      padding-top: 100px;
+      text-align: center;
+      background: linear-gradient(160deg, #0e1c2b, #0d1b2a);
+      padding: 4rem 2rem;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #00b4d8;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-inline: auto;
+      color: #b0bec5;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .hero-buttons a {
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      background-color: #00b4d8;
+      transition: background 0.3s;
+    }
+
+    .hero-buttons a:hover {
+      background-color: #0099ba;
+    }
+
+    .leaderboard-section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .leaderboard-section h2 {
+      color: #00b4d8;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: linear-gradient(145deg, #0e1c2b, #0b1723);
+      box-shadow: 0 0 10px #00b4d8;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #2c3e50;
+    }
+
+    th {
+      background-color: #00b4d8;
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: #16324f;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #888;
+      font-size: 0.9rem;
+      background-color: #0b1723;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-title">🚀 QuizMaster</div>
+    <div class="nav-buttons">
+      <a href="{{ url_for('login') }}"><button class="nav-btn login-btn">Login</button></a>
+      <a href="{{ url_for('signup') }}"><button class="nav-btn signup-btn">Sign Up</button></a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Elevate Your Trivia Game</h1>
+    <p>Test your skills with the most thrilling quizzes online. Compete globally and master every category!</p>
+    <div class="hero-buttons">
+      <a href="{{ url_for('quiz', qno=1) }}">Play Now</a>
+      <a href="{{ url_for('signup') }}">Create Your Quiz</a>
+    </div>
+  </header>
+
+  <section class="leaderboard-section">
+    <h2>🌐 Global Leaderboard</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in leaderboard %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>
+            {% for user in names %}
+              {% if user.id == entry.user_id %}
+                {{ user.username }}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td>{{ entry.score }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    © 2025 QuizMaster. All rights reserved.
+  </footer>
+
+</body>
+</html>

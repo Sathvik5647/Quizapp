@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Finished</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d1b2a;
+            font-family: "Poppins", sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 96%;
+            background-color: #0b1723;
+            box-shadow: 0 2px 8px #00b4d8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            color: #00b4d8;
+            font-weight: 800;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            background-color: #00b4d8;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #0099ba;
+        }
+
+        .container {
+            text-align: center;
+            background: linear-gradient(145deg, #0e1c2b, #0b1723);
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 0 10px #00b4d8;
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 82px;
+            gap: 66px;
+        }
+
+        .score {
+            font-size: 28px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background-color: #00b4d8;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0099ba;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-title">🚀 QuizMaster</div>
+        <a href="{{ url_for('logout') }}"><button class="nav-btn">Logout</button></a>
+    </nav>
+    <div class="container">
+        <div class="score">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for msg in messages %}
+                <li>{{ msg }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            <p>Your score: {{ score }}/5</p>
+        </div>
+        <form action="{{ url_for('dashboard') }}">
+            <button class="btn" type="submit">Go to Dashboard</button>
+        </form>
+    </div>
+</body>
+
+</html>
