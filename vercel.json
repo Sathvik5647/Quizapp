@@ -1,4 +1,9 @@
 {
-    "builds": [{ "src": "quiz.py", "use": "@vercel/python" }],
-    "routes": [{ "src": "/(.*)", "dest": "quiz.py" }]
+    "version": 2,
+    "builds": [
+        { "src": "quiz.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+        { "src": "/(.*)", "dest": "quiz.py" }
+    ]
 }
