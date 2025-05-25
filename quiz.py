@@ -162,5 +162,3 @@ def finished():
     score = request.args.get('score', 0)
     return render_template('finished.html', score=score)
 
-if __name__ == '__main__':
-    app.run()

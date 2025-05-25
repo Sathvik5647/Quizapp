@@ -1,9 +1,16 @@
 {
-    "version": 2,
+    "version":2,
     "builds": [
-        { "src": "quiz.py", "use": "@vercel/python" }
+        {
+            "src":"./index.py",
+            "use": "@vercel/python",
+            "config":{"runtime":"python3.8"}
+        }
     ],
     "routes": [
-        { "src": "/(.*)", "dest": "quiz.py" }
+        {
+            "src":"/(.*)",
+            "dest":"/"
+        }
     ]
 }
